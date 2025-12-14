@@ -5,7 +5,7 @@ A production-ready, beginner-friendly starter repository for building blank webs
 ## What This Is
 
 This starter provides a blank canvas for React applications, pre-configured with:
-- React 18.2.0 with Vite for fast development
+- React 18.2.0 with Vite 5.0.12 for fast development
 - Tailwind CSS 3.4.1 for utility-first styling
 - Bootstrap 5.3.3 (CSS-only) for component classes
 - Essential libraries like React Router, Axios, and clsx
