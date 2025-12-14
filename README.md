@@ -30,7 +30,7 @@ It's perfect for beginners who want to start coding immediately without wrestlin
 Follow these steps to set up your new project:
 
 ```bash
-# Clone the repository (replace <REPO_URL> with actual URL)
+# Clone the repository
 git clone https://github.com/Danncode10/Web-Starter-React.git ui
 
 # Navigate to the project directory
