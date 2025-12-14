@@ -8,6 +8,7 @@ This starter provides a blank canvas for React applications, pre-configured with
 - React 18.2.0 with Vite 5.0.12 for fast development
 - Tailwind CSS 3.4.1 for utility-first styling
 - Bootstrap 5.3.3 (CSS-only) for component classes
+- Redux Toolkit & React Redux for state management
 - Essential libraries like React Router, Axios, and clsx
 
 It's perfect for beginners who want to start coding immediately without wrestling with setup issues, and for experienced developers who need a reliable, stable foundation.
@@ -86,15 +87,20 @@ This starter prioritizes compatibility and reliability over cutting-edge feature
 react-stable-starter/
 ├─ src/
 │  ├─ components/
-│  │  └─ ExampleButton.jsx    # Reusable button component
+│  │  ├─ ExampleButton.jsx    # Reusable button component
+│  │  └─ ReduxCounter.jsx     # Demo component using Redux state
 │  ├─ pages/
 │  │  └─ Home.jsx             # Home page component
 │  ├─ layouts/
 │  │  └─ MainLayout.jsx       # Main layout wrapper
+│  ├─ store/
+│  │  ├─ index.js             # Main Redux store configuration
+│  │  └─ slices/
+│  │     └─ counterSlice.js   # Example Redux slice (counter)
 │  ├─ styles/
 │  │  └─ index.css            # Global styles with Tailwind
 │  ├─ App.jsx                 # Main app component
-│  └─ main.jsx                # Entry point
+│  └─ main.jsx                # Entry point with Redux Provider
 ├─ public/                    # Static assets
 ├─ .env.example               # Environment variables template
 ├─ .gitignore                 # Git ignore rules
@@ -125,6 +131,82 @@ Available variables:
 2. **Create Components**: Use `src/components/` for reusable UI elements
 3. **Styling**: Combine Tailwind utilities with Bootstrap classes as needed
 4. **API Calls**: Use Axios for HTTP requests (already included)
+
+## Redux State Management
+
+This starter comes pre-configured with Redux Toolkit and React Redux for efficient state management.
+
+### Store Structure
+
+The Redux store is located in `src/store/`:
+- `store/index.js` - Main store configuration using `configureStore`
+- `store/slices/` - Directory for Redux slices (reducers + actions)
+
+### Example Usage
+
+Here's how to use Redux in your components:
+
+```jsx
+import { useSelector, useDispatch } from 'react-redux'
+import { increment, decrement, incrementByAmount } from '../store/slices/counterSlice'
+
+function MyComponent() {
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => dispatch(increment())}>+</button>
+      <button onClick={() => dispatch(decrement())}>-</button>
+      <button onClick={() => dispatch(incrementByAmount(5))}>+5</button>
+    </div>
+  )
+}
+```
+
+### Creating New Slices
+
+To add new state management features, create new slice files in `src/store/slices/`:
+
+```javascript
+// src/store/slices/userSlice.js
+import { createSlice } from '@reduxjs/toolkit'
+
+export const userSlice = createSlice({
+  name: 'user',
+  initialState: {
+    name: '',
+    email: ''
+  },
+  reducers: {
+    setUser: (state, action) => {
+      state.name = action.payload.name
+      state.email = action.payload.email
+    },
+    clearUser: (state) => {
+      state.name = ''
+      state.email = ''
+    }
+  }
+})
+
+export const { setUser, clearUser } = userSlice.actions
+export default userSlice.reducer
+```
+
+Then add it to your store in `src/store/index.js`:
+
+```javascript
+import userReducer from './slices/userSlice'
+
+export const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+    user: userReducer
+  }
+})
+```
 
 ## Contributing
 
