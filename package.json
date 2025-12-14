@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A production-ready React starter with Vite, Tailwind CSS, and Bootstrap",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
