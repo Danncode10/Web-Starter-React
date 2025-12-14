@@ -31,7 +31,7 @@ Follow these steps to set up your new project:
 
 ```bash
 # Clone the repository (replace <REPO_URL> with actual URL)
-git clone <REPO_URL> ui
+git clone https://github.com/Danncode10/Web-Starter-React.git ui
 
 # Navigate to the project directory
 cd my-project
