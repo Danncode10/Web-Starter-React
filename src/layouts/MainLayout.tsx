@@ -1,4 +1,10 @@
-function MainLayout({ children }) {
+import React from 'react'
+
+interface MainLayoutProps {
+  children: React.ReactNode;
+}
+
+function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow">

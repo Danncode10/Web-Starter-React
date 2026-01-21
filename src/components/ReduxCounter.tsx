@@ -1,10 +1,15 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, type TypedUseSelectorHook } from 'react-redux'
 import { increment, decrement, incrementByAmount } from '../store/slices/counterSlice'
+import { RootState, AppDispatch } from '../store'
+
 import ExampleButton from './ExampleButton'
 
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+const useAppDispatch: () => AppDispatch = useDispatch
+
 function ReduxCounter() {
-  const count = useSelector((state) => state.counter.value)
-  const dispatch = useDispatch()
+  const count = useAppSelector((state) => state.counter.value)
+  const dispatch = useAppDispatch()
 
   return (
     <div className="text-center p-6">

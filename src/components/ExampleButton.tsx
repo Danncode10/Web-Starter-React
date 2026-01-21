@@ -1,6 +1,11 @@
 import clsx from 'clsx'
 
-function ExampleButton({ children, className, ...props }) {
+interface ExampleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  className?: string;
+}
+
+function ExampleButton({ children, className, ...props }: ExampleButtonProps) {
   return (
     <button
       className={clsx(
