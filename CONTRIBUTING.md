@@ -149,10 +149,11 @@ src/
 ├── pages/         # Page components
 ├── store/         # Redux store and slices
 ├── styles/        # Global styles
-└── main.jsx       # Application entry point
+└── main.tsx       # Application entry point
 ```
 
 ## Additional Resources
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
 
 - [React Documentation](https://react.dev/)
 - [Vite Documentation](https://vitejs.dev/)

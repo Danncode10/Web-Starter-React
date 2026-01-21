@@ -1,13 +1,13 @@
 # React Stable Starter
 
-A production-ready, beginner-friendly starter repository for building blank websites with React, Tailwind CSS, and Bootstrap. Designed for maximum compatibility, minimal install errors, and clean software engineering practices.
+A production-ready, beginner-friendly starter repository for building blank websites with React and Tailwind CSS. Designed for maximum compatibility, minimal install errors, and clean software engineering practices.
 
 ## What This Is
 
 This starter provides a blank canvas for React applications, pre-configured with:
 - React 18.2.0 with Vite 5.0.12 for fast development
+- TypeScript for type-safety
 - Tailwind CSS 3.4.1 for utility-first styling
-- Bootstrap 5.3.3 (CSS-only) for component classes
 - Redux Toolkit & React Redux for state management
 - Essential libraries like React Router, Axios, and clsx
 
@@ -87,20 +87,20 @@ This starter prioritizes compatibility and reliability over cutting-edge feature
 react-stable-starter/
 ├─ src/
 │  ├─ components/
-│  │  ├─ ExampleButton.jsx    # Reusable button component
-│  │  └─ ReduxCounter.jsx     # Demo component using Redux state
+│  │  ├─ ExampleButton.tsx    # Reusable button component
+│  │  └─ ReduxCounter.tsx     # Demo component using Redux state
 │  ├─ pages/
-│  │  └─ Home.jsx             # Home page component
+│  │  └─ Home.tsx             # Home page component
 │  ├─ layouts/
-│  │  └─ MainLayout.jsx       # Main layout wrapper
+│  │  └─ MainLayout.tsx       # Main layout wrapper
 │  ├─ store/
-│  │  ├─ index.js             # Main Redux store configuration
+│  │  ├─ index.ts             # Main Redux store configuration
 │  │  └─ slices/
-│  │     └─ counterSlice.js   # Example Redux slice (counter)
+│  │     └─ counterSlice.ts   # Example Redux slice (counter)
 │  ├─ styles/
 │  │  └─ index.css            # Global styles with Tailwind
-│  ├─ App.jsx                 # Main app component
-│  └─ main.jsx                # Entry point with Redux Provider
+│  ├─ App.tsx                 # Main app component
+│  └─ main.tsx                # Entry point with Redux Provider
 ├─ public/                    # Static assets
 ├─ .env.example               # Environment variables template
 ├─ .gitignore                 # Git ignore rules
@@ -127,9 +127,9 @@ Available variables:
 
 ## Getting Started with Development
 
-1. **Add New Pages**: Create components in `src/pages/` and add routes in `src/App.jsx`
+1. **Add New Pages**: Create components in `src/pages/` and add routes in `src/App.tsx`
 2. **Create Components**: Use `src/components/` for reusable UI elements
-3. **Styling**: Combine Tailwind utilities with Bootstrap classes as needed
+3. **Styling**: Primarily use Tailwind CSS for styling.
 4. **API Calls**: Use Axios for HTTP requests (already included)
 
 ## Redux State Management
@@ -139,20 +139,24 @@ This starter comes pre-configured with Redux Toolkit and React Redux for efficie
 ### Store Structure
 
 The Redux store is located in `src/store/`:
-- `store/index.js` - Main store configuration using `configureStore`
+- `store/index.ts` - Main store configuration using `configureStore`
 - `store/slices/` - Directory for Redux slices (reducers + actions)
 
 ### Example Usage
 
 Here's how to use Redux in your components:
 
-```jsx
-import { useSelector, useDispatch } from 'react-redux'
+```tsx
+import { useSelector, useDispatch, type TypedUseSelectorHook } from 'react-redux'
 import { increment, decrement, incrementByAmount } from '../store/slices/counterSlice'
+import { RootState, AppDispatch } from '../store'
+
+const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+const useAppDispatch: () => AppDispatch = useDispatch
 
 function MyComponent() {
-  const count = useSelector((state) => state.counter.value)
-  const dispatch = useDispatch()
+  const count = useAppSelector((state) => state.counter.value)
+  const dispatch = useAppDispatch()
 
   return (
     <div>
@@ -169,9 +173,19 @@ function MyComponent() {
 
 To add new state management features, create new slice files in `src/store/slices/`:
 
-```javascript
-// src/store/slices/userSlice.js
-import { createSlice } from '@reduxjs/toolkit'
+```typescript
+// src/store/slices/userSlice.ts
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
+interface UserState {
+  name: string;
+  email: string;
+}
+
+const initialState: UserState = {
+  name: '',
+  email: '',
+}
 
 export const userSlice = createSlice({
   name: 'user',
