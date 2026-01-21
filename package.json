@@ -1,7 +1,7 @@
 {
   "name": "react-stable-starter",
   "version": "1.0.0",
-  "description": "A production-ready React starter with Vite, Tailwind CSS, and Bootstrap",
+  "description": "A production-ready React starter with Vite, Tailwind CSS, and TypeScript",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
@@ -35,7 +35,7 @@
     "react",
     "vite",
     "tailwindcss",
-    "bootstrap",
+    "typescript",
     "starter"
   ],
   "author": "",

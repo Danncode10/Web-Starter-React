@@ -1,6 +1,6 @@
 # React Stable Starter
 
-A production-ready, beginner-friendly starter repository for building blank websites with React and Tailwind CSS. Designed for maximum compatibility, minimal install errors, and clean software engineering practices.
+A production-ready, beginner-friendly starter repository for building blank websites with React, Tailwind CSS, and TypeScript. Designed for maximum compatibility, minimal install errors, and clean software engineering practices.
 
 ## What This Is
 
@@ -209,7 +209,7 @@ export const { setUser, clearUser } = userSlice.actions
 export default userSlice.reducer
 ```
 
-Then add it to your store in `src/store/index.js`:
+Then add it to your store in `src/store/index.ts`:
 
 ```javascript
 import userReducer from './slices/userSlice'
